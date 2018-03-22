@@ -40,9 +40,12 @@ def signup():
                 new_user = User(
                     username=form.username.data,
                     email=form.email.data,
-                    password=form.password.data)
-                if form.image_url.data:
-                    new_user.image_url = form.image_url.data
+                    password=form.password.data,
+                    name=form.name.data or None,
+                    location=form.location.data or None,
+                    bio=form.bio.data or None,
+                    header_image_url=form.header_image_url.data or None,
+                    image_url=form.image_url.data or None)
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
@@ -127,6 +130,10 @@ def show(id):
                 found_user.username = form.username.data
                 found_user.email = form.email.data
                 found_user.image_url = form.image_url.data or None
+                found_user.name = form.name.data or None
+                found_user.location = form.location.data or None
+                found_user.bio = form.bio.data or None
+                found_user.header_image_url = form.header_image_url.data or None
                 db.session.add(found_user)
                 db.session.commit()
                 return redirect(url_for('users.show', id=id))
@@ -139,3 +146,9 @@ def show(id):
         db.session.delete(found_user)
         db.session.commit()
         return redirect(url_for('users.signup'))
+
+    # name = StringField('name')
+    # location = StringField('location')
+    # bio = StringField(
+    #     'bio', validators=[Length(max=140), URL()], widget=TextArea())
+    # header_image_url = StringField('header image url')

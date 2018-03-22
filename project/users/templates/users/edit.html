@@ -4,7 +4,9 @@
   <div class="col-md-4">
     <h2 class="join-message">Edit Your Profile.</h2>
     <form action="{{ url_for('users.show', id=user.id) }}?_method=PATCH" method="POST" id="user_form">
+    
       {{ form.csrf_token }}
+
       {% if form.email.errors %}
         {% for error in form.email.errors %}
           <span class="text-danger">
@@ -12,7 +14,10 @@
           </span>
         {% endfor %}
       {% endif %}
+
+
       {{ form.email(placeholder="What's your email?", value=user.email, class="form-control") }}
+
       {% if form.username.errors %}
         {% for error in form.username.errors %}
           <span class="text-danger">
@@ -20,7 +25,10 @@
           </span>
         {% endfor %}
       {% endif %}
+
+
       {{ form.username(placeholder="What do you want your username to be?", value=user.username, class="form-control") }}
+
         {% if form.image_url.errors %}
           {% for error in form.image_url.errors %}
           <span class="text-danger">
@@ -28,8 +36,51 @@
           </span>
         {% endfor %}
       {% endif %}
+
       {{ form.image_url(placeholder="Optional: What image do you want to use?", value=user.image_url,
       class="form-control") }}
+
+      <!-- user.name -->
+
+            {% if form.name.errors %} 
+              {% for error in form.name.errors %}
+                <span class="text-danger">
+                  {{ error }}
+                </span>
+              {% endfor %} 
+            {% endif %}
+
+            {{ form.name(placeholder="What do you want your display name to be?", value=user.name, class="form-control") }} 
+
+      <!-- user.location -->
+
+            {% if form.location.errors %} {% for error in form.location.errors %}
+              <span class="text-danger">
+                {{ error }}
+              </span>
+            {% endfor %} {% endif %} {{ form.location(placeholder="What do you want your display location to be?", value=user.location, class="form-control")
+            }}
+
+      <!-- user.bio -->
+      
+             {% if form.bio.errors %} {% for error in form.bio.errors %}
+            <span class="text-danger">
+              {{ error }}
+            </span>
+            {% endfor %} {% endif %} {{ form.bio(placeholder="What do you want your bio to be?", value=user.bio, class="form-control")
+            }}
+      
+      <!-- user.header_image_url -->
+
+             {% if form.header_image_url.errors %} {% for error in form.header_image_url.errors %}
+            <span class="text-danger">
+              {{ error }}
+            </span>
+            {% endfor %} {% endif %} {{ form.header_image_url(placeholder="What's the url for the header image you'd like?", value=user.header_image_url, class="form-control")
+            }}
+
+      <!-- END EDIT -->
+
       <p>To confirm changes, enter your password:</p>
       {% if form.password.errors %}
         {% for error in form.password.errors %}
@@ -38,12 +89,16 @@
           </span>
         {% endfor %}
       {% endif %}
+
       {{ form.password(placeholder="Enter your password to confirm", class="form-control") }}
+      
       <div class="edit-btn-area">
         <button type="submit" class="btn btn-success">Edit this user!</button>
         <a href="{{ url_for('users.show', id=user.id) }}" class="btn btn-outline-secondary">Cancel</a>
       </div>
+    
     </form>
+  
   </div>
 </div>
 {% endblock %}

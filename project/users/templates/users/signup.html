@@ -1,30 +1,107 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="row justify-content-md-center">
   <div class="col-md-4">
     <h2 class="join-message">Join Warbler today.</h2>
     <form action="{{ url_for('users.signup') }}" method="POST" id="user_form">
-      {{ form.csrf_token }} {% if form.email.errors %} {% for error in form.email.errors %}
-      <span class="text-danger">
-        {{ error }}
-      </span>
-      {% endfor %} {% endif %} {{ form.email(placeholder="E-mail", class="form-control") }} {% if form.username.errors %} {% for
-      error in form.username.errors %}
-      <span class="text-danger">
-        {{ error }}
-      </span>
-      {% endfor %} {% endif %} {{ form.username(placeholder="Username", class="form-control") }} {% if form.password.errors %}
-      {% for error in form.password.errors %}
-      <span class="text-danger">
-        {{ error }}
-      </span>
-      {% endfor %} {% endif %} {{ form.password(placeholder="Password", class="form-control") }} {% if form.image_url.errors %}
-      {% for error in form.image_url.errors %}
-      <span class="text-danger">
-        {{ error }}
-      </span>
-      {% endfor %} {% endif %} {{ form.image_url(placeholder="Image URL", class="form-control") }}
+
+      {{ form.csrf_token }} 
+
+      {% if form.email.errors %} 
+        {% for error in form.email.errors %}
+          <span class="text-danger">
+             {{ error }}
+          </span>
+        {% endfor %} 
+      {% endif %} 
+      
+      {{ form.email(placeholder="E-mail", class="form-control") }} 
+      
+    <!--  -->
+
+      {% if form.username.errors %} 
+        {% for error in form.username.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %} 
+      {% endif %} 
+      
+      {{ form.username(placeholder="Username", class="form-control") }} 
+      
+      <!--  -->
+
+      {% if form.password.errors %}
+        {% for error in form.password.errors %}
+          <span class="text-danger">
+            {{ error }}
+           </span>
+        {% endfor %} 
+      {% endif %} 
+      
+      {{ form.password(placeholder="Password", class="form-control") }} 
+      
+      <!--  -->
+
+      {% if form.image_url.errors %}
+        {% for error in form.image_url.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %} 
+      {% endif %} 
+      
+      {{ form.image_url(placeholder="Image URL", class="form-control") }}
+     
+      <!-- name -->
+
+      {% if form.name.errors %} 
+        {% for error in form.name.errors %}
+          <span class="text-danger">
+            {{ error }}
+          </span>
+        {% endfor %} 
+      {% endif %} 
+      
+      {{ form.name(placeholder="Display Name", class="form-control") }}
+
+      <!-- location -->
+
+       {% if form.location.errors %}
+         {% for error in form.location.errors %}
+          <span class="text-danger">
+             {{ error }}
+          </span>
+         {% endfor %}
+       {% endif %}
+
+       {{ form.name(placeholder="Location", class="form-control") }}
+
+
+      <!-- bio -->
+
+       {% if form.bio.errors %} 
+        {% for error in form.bio.errors %}
+          <span class="text-danger">
+           {{ error }}
+            </span>
+      {% endfor %} 
+      {% endif %} 
+      
+      {{ form.name(placeholder="Bio", class="form-control") }}
+
+
+      <!-- header url -->
+
+         {% if form.header_image_url.errors %} {% for error in form.header_image_url.errors %}
+        <span class="text-danger">
+          {{ error }}
+        </span>
+        {% endfor %} {% endif %} {{ form.name(placeholder="Header Image URL", class="form-control") }}
+
+      <!-- end edit -->
+
       <button type="submit" class="btn btn-primary btn-lg btn-block">Sign me up!</button>
+    
     </form>
 
   </div>
