@@ -33,7 +33,7 @@ def index():
 
 @users_blueprint.route('/signup', methods=["GET", "POST"])
 def signup():
-    form = UserForm()
+    form = UserForm(request.form)
     if request.method == "POST":
         if form.validate():
             try:
@@ -87,8 +87,12 @@ def logout():
 @login_required
 @ensure_correct_user
 def edit(id):
+    form = UserForm(obj=User.query.get(id))
     return render_template(
-        'users/edit.html', form=UserForm(), user=User.query.get(id))
+        'users/edit.html',
+        form=form,
+        user=User.query.get(id),
+    )
 
 
 @users_blueprint.route(

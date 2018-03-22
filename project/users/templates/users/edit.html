@@ -37,8 +37,7 @@
         {% endfor %}
       {% endif %}
 
-      {{ form.image_url(placeholder="Optional: What image do you want to use?", value=user.image_url,
-      class="form-control") }}
+      {{ form.image_url(placeholder="Optional: What image do you want to use?", class="form-control") }}
 
       <!-- user.name -->
 
@@ -50,7 +49,7 @@
               {% endfor %} 
             {% endif %}
 
-            {{ form.name(placeholder="What do you want your display name to be?", value=user.name, class="form-control") }} 
+            {{ form.name(placeholder="What do you want your display name to be?", class="form-control") }} 
 
       <!-- user.location -->
 
@@ -58,7 +57,7 @@
               <span class="text-danger">
                 {{ error }}
               </span>
-            {% endfor %} {% endif %} {{ form.location(placeholder="What do you want your display location to be?", value=user.location, class="form-control")
+            {% endfor %} {% endif %} {{ form.location(placeholder="What do you want your display location to be?", class="form-control")
             }}
 
       <!-- user.bio -->
@@ -67,7 +66,7 @@
             <span class="text-danger">
               {{ error }}
             </span>
-            {% endfor %} {% endif %} {{ form.bio(placeholder="What do you want your bio to be?", value=user.bio, class="form-control")
+            {% endfor %} {% endif %} {{ form.bio(placeholder="What do you want your bio to be?", class="form-control")
             }}
       
       <!-- user.header_image_url -->
@@ -76,7 +75,7 @@
             <span class="text-danger">
               {{ error }}
             </span>
-            {% endfor %} {% endif %} {{ form.header_image_url(placeholder="What's the url for the header image you'd like?", value=user.header_image_url, class="form-control")
+            {% endfor %} {% endif %} {{ form.header_image_url(placeholder="What's the url for the header image you'd like?", class="form-control")
             }}
 
       <!-- END EDIT -->

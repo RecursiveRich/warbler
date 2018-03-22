@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired, Email, Length, URL
+from wtforms.validators import DataRequired, Email, Length
 from wtforms.widgets import TextArea
 
 
@@ -12,7 +12,7 @@ class UserForm(FlaskForm):
     name = StringField('name')
     location = StringField('location')
     bio = StringField('bio', validators=[Length(max=140)], widget=TextArea())
-    header_image_url = StringField('header image url', validators=[URL()])
+    header_image_url = StringField('header image url')
 
 
 class LoginForm(FlaskForm):
