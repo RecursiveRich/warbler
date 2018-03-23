@@ -2,6 +2,9 @@
 {% block content %} 
 {% if current_user.is_authenticated %}
 <div class="row">
+  
+  <!-- CURRENT_USER CARD -->
+  
   <aside class="col-lg-3 col-md-12" id="home-aside">
     <div class="card user-card">
       <div>
@@ -33,9 +36,14 @@
       </div>
     </div>
   </aside>
+
+
+  <!-- UNORDERED LIST OF MESSAGES FOLLOWED BY CURRENT_USER -->
+
   <div class="col-lg-6 col-md-12">
     <ul class="list-group" id="messages">
       {% for message in messages %}
+      
       <li class="list-group-item">
         <a href="{{ url_for('messages.show', id=message.user.id, message_id=message.id ) }}" class="message-link"/>
         <a href="{{ url_for('users.show', id=message.user.id) }}">
@@ -45,11 +53,28 @@
           <a href="{{ url_for('users.show', id=message.user.id) }}">@{{ message.user.username }}</a>
           <span class="text-muted">{{ message.timestamp.strftime('%d %B %Y') }}</span>
           <p>{{ message.text }}</p>
+          
+          <!-- CONDITIONAL LOGIC TO DISPLAY LIKE OR NOT -->
+          
+          {% if message in current_user.likes %}
+          <form action="{{url_for('messages.likes', id=message.user.id, message_id=message.id)}}?_method=DELETE" method="POST">
+            <!-- <button class="fas fa-heart" style="color: blue"></button> -->
+            <button class="btn btn-secondary like-button">Liked</button>
+          </form>
+          {% else %}
+          <form action="{{ url_for('messages.likes', id=message.user.id, message_id=message.id) }}" method="POST">
+            <!-- <button role="submit" class="far fa-heart" style="color: blue"></button> -->
+            <button class="btn btn-primary like-button">Like</button>
+          </form>
+          {% endif %}
         </div>
       </li>
       {% endfor %}
     </ul>
+
   </div>
+
+
 </div>
 {% else %}
 <div class="home-hero">

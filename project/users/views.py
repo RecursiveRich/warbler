@@ -133,11 +133,11 @@ def show(id):
             if User.authenticate(found_user.username, form.password.data):
                 found_user.username = form.username.data
                 found_user.email = form.email.data
-                found_user.image_url = form.image_url.data or None
-                found_user.name = form.name.data or None
-                found_user.location = form.location.data or None
-                found_user.bio = form.bio.data or None
-                found_user.header_image_url = form.header_image_url.data or None
+                found_user.image_url = form.image_url.data
+                found_user.name = form.name.data
+                found_user.location = form.location.data
+                found_user.bio = form.bio.data
+                found_user.header_image_url = form.header_image_url.data
                 db.session.add(found_user)
                 db.session.commit()
                 return redirect(url_for('users.show', id=id))
@@ -147,12 +147,7 @@ def show(id):
             })
         return render_template('users/edit.html', form=form, user=found_user)
     if request.method == b"DELETE":
+        logout_user()
         db.session.delete(found_user)
         db.session.commit()
         return redirect(url_for('users.signup'))
-
-    # name = StringField('name')
-    # location = StringField('location')
-    # bio = StringField(
-    #     'bio', validators=[Length(max=140), URL()], widget=TextArea())
-    # header_image_url = StringField('header image url')

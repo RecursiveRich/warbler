@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_modus import Modus
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_migrate import Migrate
 import os
@@ -46,7 +46,17 @@ def load_user(id):
 
 @app.route('/')
 def root():
-    messages = Message.query.order_by("timestamp asc").limit(100).all()
+    # messages = Message.query.order_by("timestamp asc").limit(100).all()
+    following_ids = [u.id for u in current_user.following.all()]
+    condition1 = Message.user_id.in_(following_ids)
+    # condition2 = Message.user_id == current_user.id  #or_ gives an error with from flask_sqlalchemy import or_
+    messages = Message.query.filter(condition1).order_by(
+        "timestamp asc").limit(100).all()
+    # messages = current_user.messages.all()
+    # for u in current_user.following.all():
+    #     messages += u.messages.all()
+    # if len(messages) > 100:
+    #     messages = messages[0:100]
     return render_template('home.html', messages=messages)
 
 

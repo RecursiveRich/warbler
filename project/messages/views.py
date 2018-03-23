@@ -37,3 +37,16 @@ def show(id, message_id):
         db.session.commit()
         return redirect(url_for('users.show', id=id))
     return render_template('messages/show.html', message=found_message)
+
+
+@messages_blueprint.route(
+    '/<int:message_id>/likes', methods=["POST", "DELETE"])
+@login_required
+def likes(id, message_id):
+    message = Message.query.get(message_id)
+    if request.method == b"DELETE":
+        current_user.likes.remove(message)
+    else:
+        current_user.likes.append(message)
+    db.session.commit()
+    return redirect(url_for('root'))
